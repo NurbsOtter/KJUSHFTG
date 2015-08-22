@@ -48,7 +48,9 @@ public class FlipControl : MonoBehaviour {
 		}
 
 	}
-	
+	public void DoTheWave(){
+		flipping = true;
+	}
 	// Update is called once per frame
 	void Update () {
 		if (flipping) {
