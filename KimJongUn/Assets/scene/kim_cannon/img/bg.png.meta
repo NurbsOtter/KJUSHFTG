@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 2ab944745e791584fa312376ea6ca636
-timeCreated: 1440212303
+timeCreated: 1440253224
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: bg_0
+    21300002: bg_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -51,6 +52,16 @@ TextureImporter:
   spriteSheet:
     sprites:
     - name: bg_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 167
+        width: 1280
+        height: 230
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bg_1
       rect:
         serializedVersion: 2
         x: 0

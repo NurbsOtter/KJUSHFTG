@@ -3,7 +3,8 @@ using System.Collections;
 
 public class BgScroll : MonoBehaviour {
 
-	public float speed = -0.05f;
+    public baby_kim kim;
+    public float factor = 1.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +14,7 @@ public class BgScroll : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Vector3 pos = transform.position;
-        pos.x += speed * Time.deltaTime;
+        pos.x += kim.xvel * Time.deltaTime * factor;
         if (pos.x < -9.6f) {
             pos.x += 12.8f;
 		}
