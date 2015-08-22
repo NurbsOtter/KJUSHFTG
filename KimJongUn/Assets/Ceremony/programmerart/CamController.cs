@@ -15,6 +15,18 @@ public class CamController : MonoBehaviour {
 		newMove.x += Input.GetAxis ("Mouse X") * camSpeed * Time.deltaTime;
 		newMove.y += Input.GetAxis ("Mouse Y") * camSpeed * Time.deltaTime;
 		newMove += this.transform.position;
+		if (newMove.x > 6.5f) {
+			newMove.x = 6.5f;
+		}
+		if (newMove.x < 1.5f) {
+			newMove.x = 1.5f;
+		}
+		if (newMove.y > 8.5f){
+			newMove.y = 8.5f;
+		}
+		if (newMove.y < 1.0f) {
+			newMove.y = 1.0f;
+		}
 		this.transform.position = newMove;
 	}
 }
