@@ -21,6 +21,8 @@ public class CardFlipper : MonoBehaviour, ICardFlip {
 			if (timeSinceFlip <= flipTime) {
 				Vector3 newRot = this.transform.rotation.eulerAngles;
 				newRot.x = (timeSinceFlip/flipTime) * 180.0f;
+				newRot.y = 0.0f;
+				newRot.z = 0.0f;
 				this.transform.rotation = Quaternion.Euler(newRot);
 				//Debug.Log(timeSinceFlip / flipTime);
 				if ((timeSinceFlip/flipTime) > .5f && !colorSwapped){
