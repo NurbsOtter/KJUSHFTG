@@ -3,7 +3,7 @@ using System.Collections;
 
 public class baby_kim : MonoBehaviour {
 
-    public float xvel = -3f;
+    public float xvel = 0f;
     public Sprite clothes;
     private float rotate;
 
@@ -19,6 +19,10 @@ public class baby_kim : MonoBehaviour {
         Vector3 pos = transform.position;
         if (pos.x > 0) {
             pos.x = 0;
+            Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+            xvel = -vel.x;
+            vel.x = 0f;
+            GetComponent<Rigidbody2D>().velocity = vel;
         }
         transform.position = pos;
         GetComponent<Transform>().Rotate(0f, 0f, -rotate);
@@ -28,5 +32,9 @@ public class baby_kim : MonoBehaviour {
         if (coll.gameObject.tag.Equals("ground")) {
             rotate *= 0.95f;
         }
+    }
+
+    public void getSuit() {
+        GetComponent<SpriteRenderer>().sprite = clothes;
     }
 }
