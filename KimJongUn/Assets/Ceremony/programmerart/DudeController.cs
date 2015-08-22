@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class DudeController : MonoBehaviour {
-
+public interface IKillDude: UnityEngine.EventSystems.IEventSystemHandler{
+	void killDude();
+}
+public class DudeController : MonoBehaviour, IKillDude {
+	bool alive = true;
 	// Use this for initialization
 	void Start () {
 	
@@ -11,5 +13,8 @@ public class DudeController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+	public void killDude(){
+		Destroy (this.gameObject);
 	}
 }

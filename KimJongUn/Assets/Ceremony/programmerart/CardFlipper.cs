@@ -11,6 +11,7 @@ public class CardFlipper : MonoBehaviour, ICardFlip {
 	public bool flipping = true;
 	public bool colorSwapped = false;
 	Texture2D newFlip;
+	public bool allowedFlip = true;
 	public Color newColor;
 	// Use this for initialization
 	void Start () {
@@ -18,7 +19,7 @@ public class CardFlipper : MonoBehaviour, ICardFlip {
 	}
 	// Update is called once per frame
 	void Update () {
-		if (flipping) {
+		if (flipping && allowedFlip) {
 			if (timeSinceFlip <= flipTime) {
 				Vector3 newRot = this.transform.rotation.eulerAngles;
 				newRot.x = (timeSinceFlip/flipTime) * 180.0f;
