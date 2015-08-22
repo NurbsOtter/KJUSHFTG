@@ -4,6 +4,7 @@ using System.Collections;
 public class CamController : MonoBehaviour {
 	public float camSpeed = 1.0f;
 	public float camSpeedZoomed = 1.0f;
+	public bool zoomed = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -26,6 +27,15 @@ public class CamController : MonoBehaviour {
 		}
 		if (newMove.y < 1.0f) {
 			newMove.y = 1.0f;
+		}
+		if (Input.GetMouseButtonDown(1)) {
+			if (zoomed){
+				Camera.main.orthographicSize = 2.4f;
+				zoomed = false;
+			}else{
+				Camera.main.orthographicSize = 1.5f;
+				zoomed = true;
+			}
 		}
 		this.transform.position = newMove;
 	}
