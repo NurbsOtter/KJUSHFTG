@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 public interface ICardFlip: UnityEngine.EventSystems.IEventSystemHandler{
-	void FlipCard();
+	void FlipCardNoSwap();
 }
 
 public class CardFlipper : MonoBehaviour, ICardFlip {
@@ -10,6 +10,7 @@ public class CardFlipper : MonoBehaviour, ICardFlip {
 	public float timeSinceFlip = 0.0f;
 	public bool flipping = true;
 	public bool colorSwapped = false;
+	Texture2D newFlip;
 	public Color newColor;
 	// Use this for initialization
 	void Start () {
@@ -26,7 +27,10 @@ public class CardFlipper : MonoBehaviour, ICardFlip {
 				this.transform.rotation = Quaternion.Euler(newRot);
 				//Debug.Log(timeSinceFlip / flipTime);
 				if ((timeSinceFlip/flipTime) > .5f && !colorSwapped){
-					mySprite.color = newColor;
+					if (newFlip != null){
+						mySprite.sprite = Sprite.Create(newFlip,new Rect(0,0,40,40),new Vector2(0.5f,0.5f));
+						newFlip = null;
+					}
 					colorSwapped = true;
 				}
 				timeSinceFlip += Time.deltaTime;
@@ -39,8 +43,11 @@ public class CardFlipper : MonoBehaviour, ICardFlip {
 			}
 		}
 	}
-	public void FlipCard(){
-		//newColor = new Color (r, g, b);
+	public void FlipCardNoSwap(){
 		flipping = true;
+	}
+	public void SwapImage(Texture2D flipTo){
+		flipping = true;
+		newFlip = flipTo;
 	}
 }

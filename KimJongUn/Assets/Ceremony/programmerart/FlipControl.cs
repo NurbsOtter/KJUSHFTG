@@ -7,7 +7,12 @@ using System.IO;
 public class FlipControl : MonoBehaviour {
 	GameObject[,] flippers;
 	public GameObject sign;
+	public string[] propagandaList = new string[]{
+		"/Ceremony/programmerart/1.png",
+		"/Ceremony/programmerart/gloriousleader.png",
+	};
 	public GameObject dude;
+	float timeToNextFlip =0.0f;
 	public int x, y;
 	public Texture2D propaganda; 
 	int flipX = 0;
@@ -35,7 +40,6 @@ public class FlipControl : MonoBehaviour {
 		propaganda = loadImage (inNewImage);
 	}
 
-
 	// Use this for initialization
 	void Start () {
 		propaganda = loadImage (Application.dataPath+ "/Ceremony/programmerart/gloriousleader.png");
@@ -44,8 +48,9 @@ public class FlipControl : MonoBehaviour {
 			for (int i2 = 0; i2 < y; i2++){
 				Instantiate(dude,new Vector3(i,i2,0.0f),Quaternion.identity);
 				flippers[i,i2] = (GameObject)Instantiate(sign,new Vector3(i,i2,0.0f),Quaternion.identity);
-				flippers[i,i2].GetComponent<SpriteRenderer>().sprite = Sprite.Create(cutImage(i,i2),new Rect(0,0,40,40),new Vector2(0.5f,0.5f));
+				//flippers[i,i2].GetComponent<SpriteRenderer>().sprite = Sprite.Create(cutImage(i,i2),new Rect(0,0,40,40),new Vector2(0.5f,0.5f));
 				flippers[i,i2].transform.localScale = new Vector3(2.3f,2.3f,0.0f);
+				flippers[i,i2].SendMessage("SwapImage",cutImage(i,i2));
 			}
 		}
 
@@ -56,19 +61,31 @@ public class FlipControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (flipping) {
-			if (sinceFlip > flipDelay){
-				if (flipX < 10){ //Do another one!
-					for (int i = 0; i < 10;i++){
-						flippers[flipX,i].SendMessage("FlipCard");
+			if (sinceFlip >= flipDelay) {
+				if (flipX < 10) { //Do another one!
+					for (int i = 0; i < 10; i++) {
+						flippers [flipX, i].SendMessage ("SwapImage",cutImage(flipX,i));
 					}
 					flipX++;
 					sinceFlip = 0.0f;
-				}else{
+				} else {
 					flipping = false;
+					flipX = 0;
 					sinceFlip = 0.0f;
 				}
-			}else{
+			} else {
 				sinceFlip += Time.deltaTime;
+			}
+		} else {
+			if (timeToNextFlip <= 0.0f){
+				flipping = true;
+				timeToNextFlip = Random.Range(1.0f,8.0f);
+				int newImage = Random.Range (0,2);
+				propaganda = loadImage(Application.dataPath + propagandaList[newImage]);
+
+			}else{
+				timeToNextFlip -= Time.deltaTime;
+				//Debug.Log (timeToNextFlip);
 			}
 		}
 	}
