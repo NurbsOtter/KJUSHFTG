@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 public interface ICardFlip: UnityEngine.EventSystems.IEventSystemHandler{
-	void FlipCard(float r, float g, float b);
+	void FlipCard();
 }
 
 public class CardFlipper : MonoBehaviour, ICardFlip {
@@ -39,8 +39,8 @@ public class CardFlipper : MonoBehaviour, ICardFlip {
 			}
 		}
 	}
-	public void FlipCard(float r, float g, float b){
-		newColor = new Color (r, g, b);
+	public void FlipCard(){
+		//newColor = new Color (r, g, b);
 		flipping = true;
 	}
 }

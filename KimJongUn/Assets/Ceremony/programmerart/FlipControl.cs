@@ -9,6 +9,10 @@ public class FlipControl : MonoBehaviour {
 	public GameObject sign;
 	public int x, y;
 	public Texture2D propaganda; 
+	int flipX = 0;
+	public float flipDelay = 0.25f;
+	float sinceFlip = 0.0f;
+	public bool flipping = false;
 	public Texture2D loadImage(string inImage){
 		Texture2D newImg = null;
 		byte[] inBytes;
@@ -25,6 +29,9 @@ public class FlipControl : MonoBehaviour {
 		Texture2D outTex = new Texture2D (40, 40);
 		outTex.SetPixels(0,0,40,40,propaganda.GetPixels (inX * 40, inY * 40, 40, 40));
 		return outTex;
+	}
+	public void changeImage(string inNewImage){
+		propaganda = loadImage (inNewImage);
 	}
 
 
@@ -44,6 +51,21 @@ public class FlipControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (flipping) {
+			if (sinceFlip > flipDelay){
+				if (flipX < 10){ //Do another one!
+					for (int i = 0; i < 10;i++){
+						flippers[flipX,i].SendMessage("FlipCard");
+					}
+					flipX++;
+					sinceFlip = 0.0f;
+				}else{
+					flipping = false;
+					sinceFlip = 0.0f;
+				}
+			}else{
+				sinceFlip += Time.deltaTime;
+			}
+		}
 	}
 }
