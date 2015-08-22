@@ -7,6 +7,7 @@ using System.IO;
 public class FlipControl : MonoBehaviour {
 	GameObject[,] flippers;
 	public GameObject sign;
+	public GameObject dude;
 	public int x, y;
 	public Texture2D propaganda; 
 	int flipX = 0;
@@ -41,9 +42,10 @@ public class FlipControl : MonoBehaviour {
 		flippers = new GameObject[x,y];
 		for (int i = 0; i < x; i++) {
 			for (int i2 = 0; i2 < y; i2++){
+				Instantiate(dude,new Vector3(i,i2,0.0f),Quaternion.identity);
 				flippers[i,i2] = (GameObject)Instantiate(sign,new Vector3(i,i2,0.0f),Quaternion.identity);
 				flippers[i,i2].GetComponent<SpriteRenderer>().sprite = Sprite.Create(cutImage(i,i2),new Rect(0,0,40,40),new Vector2(0.5f,0.5f));
-				flippers[i,i2].transform.localScale = new Vector3(2.5f,2.5f,0.0f);
+				flippers[i,i2].transform.localScale = new Vector3(2.3f,2.3f,0.0f);
 			}
 		}
 
