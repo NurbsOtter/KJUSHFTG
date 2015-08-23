@@ -5,6 +5,7 @@ public interface IKillDude: UnityEngine.EventSystems.IEventSystemHandler{
 }
 public class DudeController : MonoBehaviour, IKillDude {
 	bool alive = true;
+	GameObject flip;
 	// Use this for initialization
 	void Start () {
 	
@@ -16,5 +17,9 @@ public class DudeController : MonoBehaviour, IKillDude {
 	}
 	public void killDude(){
 		Destroy (this.gameObject);
+		flip.SendMessage ("stopFlip");
+	}
+	public void SetFlip(GameObject inFlip){
+		flip = inFlip;
 	}
 }

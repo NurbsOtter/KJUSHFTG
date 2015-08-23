@@ -12,6 +12,7 @@ public class CardFlipper : MonoBehaviour, ICardFlip {
 	public bool colorSwapped = false;
 	Texture2D newFlip;
 	public bool allowedFlip = true;
+	public GameObject associatedDude;
 	public Color newColor;
 	// Use this for initialization
 	void Start () {
@@ -50,5 +51,11 @@ public class CardFlipper : MonoBehaviour, ICardFlip {
 	public void SwapImage(Texture2D flipTo){
 		flipping = true;
 		newFlip = flipTo;
+	}
+	public void stopFlip(){
+		allowedFlip = false;
+	}
+	public void SetDude(GameObject dudeIn){
+		associatedDude = dudeIn;
 	}
 }
