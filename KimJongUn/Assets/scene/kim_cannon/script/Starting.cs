@@ -8,6 +8,8 @@ public class Starting : MonoBehaviour {
     public GameObject arrow;
     private float rotate = 0f;
     private float scale = 1f;
+    public AudioClip newsong;
+    public GameObject sun;
 
     int state = 0;
     int other_state = 0;
@@ -74,5 +76,9 @@ public class Starting : MonoBehaviour {
         rb.AddForce(force);
         Destroy(GameObject.Find("Plane"));
         Camera.main.backgroundColor = new Color(122f / 255f, 200f / 255f, 236f / 255f);
+        Camera.main.GetComponent<AudioSource>().clip = newsong;
+        Camera.main.GetComponent<AudioSource>().loop = true;
+        Camera.main.GetComponent<AudioSource>().Play();
+        sun.SetActive(true);
     }
 }

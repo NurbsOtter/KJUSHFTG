@@ -15,6 +15,10 @@ public class HittableObject : MonoBehaviour {
         pos.y = Random.Range(-1.12f, -0.7f);
         transform.position = pos;
 	}
+
+    void setBaby(baby_kim k) {
+        kim = k;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -32,7 +36,11 @@ public class HittableObject : MonoBehaviour {
             spindex++;
             GetComponent<SpriteRenderer>().sprite = pics[spindex];
             Vector2 vel = kim.GetComponent<Rigidbody2D>().velocity;
-            vel.y = -vel.y * 1.8f + 10f;
+            if (vel.y > 0) {
+                vel.y = -vel.y * 1.8f + 10f;
+            } else {
+                vel.y = vel.y * 1.8f + 10f;
+            }
             kim.xvel -= 5f;
             kim.GetComponent<Rigidbody2D>().velocity = vel;
             Destroy(GetComponent<BoxCollider2D>());
