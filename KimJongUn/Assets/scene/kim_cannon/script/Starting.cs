@@ -4,7 +4,7 @@ using System.Collections;
 public class Starting : MonoBehaviour {
 
     public baby_kim kim;
-    private float power = 800f;
+    private float power = 400f;
     public GameObject arrow;
     private float rotate = 0f;
     private float scale = 1f;

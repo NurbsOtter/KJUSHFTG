@@ -21,29 +21,41 @@ public class baby_kim : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update() {
-        xvel *= 1f - (0.18f * Time.deltaTime);
-        score += -xvel / 10f;
-        canvas.SendMessage("SetScore", score);
-        Vector3 pos = transform.position;
-        if (pos.x > 0) {
-            pos.x = 0;
-            Vector2 vel = GetComponent<Rigidbody2D>().velocity;
-            xvel = -vel.x;
-            vel.x = 0f;
-            GetComponent<Rigidbody2D>().velocity = vel;
+        if (xvel <= 0) {
+            score += -xvel / 10f;
+            canvas.SendMessage("SetScore", score);
+            Vector3 pos = transform.position;
+            if (pos.x > 0) {
+                pos.x = 0;
+                Vector2 vel = GetComponent<Rigidbody2D>().velocity;
+                xvel = -vel.x;
+                vel.x = 0f;
+                GetComponent<Rigidbody2D>().velocity = vel;
+            }
+            transform.position = pos;
+            GetComponent<Transform>().Rotate(0f, 0f, -rotate);
+            if (spawnTime < Time.time) {
+                spawnTime = Time.time + spawnDelay;
+                spawnDelay += 0.3f;
+                Instantiate(target_prefab).SendMessage("setBaby", this);
+            }
         }
-        transform.position = pos;
-        GetComponent<Transform>().Rotate(0f, 0f, -rotate);
-        if (spawnTime < Time.time) {
-            spawnTime = Time.time + spawnDelay;
-            spawnDelay += 0.3f;
-            Instantiate(target_prefab).SendMessage("setBaby", this);
+
+        if (xvel > -1f) {
+            xvel = 0f;
         }
 	}
 
     void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag.Equals("ground")) {
             rotate *= 0.95f;
+            float slowFactor;
+            if (xvel > -3f) {
+                slowFactor = 0.5f;
+            } else {
+                slowFactor = 0.2f;
+            }
+            xvel *= 1f - (slowFactor);
         }
     }
 

@@ -37,9 +37,9 @@ public class HittableObject : MonoBehaviour {
             GetComponent<SpriteRenderer>().sprite = pics[spindex];
             Vector2 vel = kim.GetComponent<Rigidbody2D>().velocity;
             if (vel.y > 0) {
-                vel.y = -vel.y * 1.8f + 10f;
+                vel.y = vel.y * 1.8f + 2f;
             } else {
-                vel.y = vel.y * 1.8f + 10f;
+                vel.y = -vel.y * 1.8f + 2f;
             }
             kim.xvel -= 5f;
             kim.GetComponent<Rigidbody2D>().velocity = vel;
