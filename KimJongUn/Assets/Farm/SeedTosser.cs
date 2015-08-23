@@ -25,7 +25,7 @@ public class SeedTosser : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.E)) {
 			RaycastHit hit;
 			if (Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward,out hit,5.0f)){
-				Debug.Log (hit.collider);
+				hit.collider.SendMessage("nomnom",SendMessageOptions.DontRequireReceiver);
 			}
 		}
 	}
