@@ -1,9 +1,15 @@
 fileFormatVersion: 2
 guid: d5bbfe17fd61a7f45ad1932a5dd14b56
 folderAsset: yes
+<<<<<<< HEAD
 timeCreated: 1440282246
 licenseType: Free
 DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+>>>>>>> ceremonybranch
