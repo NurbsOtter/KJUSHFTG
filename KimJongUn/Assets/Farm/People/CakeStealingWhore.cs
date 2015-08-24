@@ -28,7 +28,7 @@ public class CakeStealingWhore : MonoBehaviour
 				nav.SetDestination (testCake.transform.position);
 			}
 		}
-		if (timeChasing >= 15.0f) {
+		if (timeChasing >= 15.0f && testCake != null && !testCake.Equals(null)) {
 			nav.SetDestination (testCake.transform.position);//Make sure we're chasing the current thing.
 			timeChasing = 0.0f;
 		} else {
