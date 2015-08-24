@@ -64,6 +64,7 @@ public class baby_kim : MonoBehaviour {
                 slowFactor = 0.2f;
             }
             xvel *= 1f - (slowFactor);
+            GetComponent<AudioSource>().Play();
         }
     }
 
