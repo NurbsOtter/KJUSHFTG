@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ButtonScript : MonoBehaviour {
-	public int buttonNo;
+	public int buttonNo= 0;
 	public GameObject factory;
 	private float timeSelected;
 	private MeshRenderer mesh;
@@ -22,5 +22,8 @@ public class ButtonScript : MonoBehaviour {
 	void isSelected(){
 		mesh.material.color = Color.green;
 		timeSelected = 0.0f;
+	}
+	void pushButton(){
+		factory.SendMessage ("buttonPush", buttonNo);
 	}
 }

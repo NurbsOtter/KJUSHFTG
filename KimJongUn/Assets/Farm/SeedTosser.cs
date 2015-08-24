@@ -31,6 +31,7 @@ public class SeedTosser : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.Mouse0)) {
 			Vector3 newPos = transform.position + transform.forward * 1.5f;
 			GameObject newSeed = (GameObject)Instantiate (seeds [curSeed], newPos, cakeRot);
+			newSeed.SendMessage("activateSeed");
 			Rigidbody seedPhys = newSeed.GetComponent<Rigidbody> ();
 			seedPhys.AddForce (transform.forward * 50.0f);
 		}
@@ -48,7 +49,7 @@ public class SeedTosser : MonoBehaviour
 						holdVictim = hit.collider.gameObject;
 					}
 					if (hit.collider.gameObject.CompareTag("button")){
-						Debug.Log (hit.collider);
+						hit.collider.gameObject.SendMessage("pushButton");
 					}
 				}
 			}else{
