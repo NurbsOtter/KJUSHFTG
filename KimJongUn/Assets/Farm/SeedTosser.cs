@@ -14,7 +14,7 @@ public class SeedTosser : MonoBehaviour
 	void Start ()
 	{
 		cakeRot = Quaternion.Euler (new Vector3 (-90.0f, 0.0f, 0.0f));
-		canvas = GameObject.Find ("Canvas");
+		canvas = GameObject.Find ("HUD Canvas");
 	}
 	
 	// Update is called once per frame
@@ -47,6 +47,9 @@ public class SeedTosser : MonoBehaviour
 					if (hit.collider.gameObject.CompareTag ("cake")) {
 						holdVictim = hit.collider.gameObject;
 					}
+					if (hit.collider.gameObject.CompareTag("button")){
+						Debug.Log (hit.collider);
+					}
 				}
 			}else{
 				holdVictim = null;
@@ -54,6 +57,12 @@ public class SeedTosser : MonoBehaviour
 		}
 		if (holdVictim != null || !holdVictim.Equals (null)) {
 			holdVictim.transform.position = holdPoint.position;
+		}
+		RaycastHit butHit;
+		if (Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out butHit,15.0f)) {
+			if (butHit.collider.gameObject.CompareTag("button")){
+				butHit.collider.gameObject.SendMessage("isSelected");
+			}
 		}
 	}
 }
