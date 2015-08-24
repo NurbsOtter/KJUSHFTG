@@ -9,9 +9,10 @@ public class baby_kim : MonoBehaviour {
     public float score = 0;
     public GameObject canvas;
     private float spawnTime;
-    private float spawnDelay = 1f;
+    private float spawnDelay = 100f;
     public GameObject target_prefab;
     private bool canControl = false;
+    private bool done = false;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,7 @@ public class baby_kim : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update() {
+        if (done) return;
         if (xvel <= 0) {
             score += -xvel / 10f;
             canvas.SendMessage("SetScore", score);
@@ -48,8 +50,11 @@ public class baby_kim : MonoBehaviour {
             }
         }
 
-        if (xvel > -1f) {
+        if (xvel > -1f && canControl) {
+            print("factory");
             xvel = 0f;
+            GameObject.Find("factory").BroadcastMessage("FactoryAnimate");
+            done = true;
         }
 
 	}
