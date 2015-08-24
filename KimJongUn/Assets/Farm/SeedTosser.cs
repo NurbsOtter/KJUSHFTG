@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class SeedTosser : MonoBehaviour
@@ -12,6 +13,7 @@ public class SeedTosser : MonoBehaviour
 	public GameObject canvas;
 	public Transform holdPoint;
 	public GameObject holdVictim;
+	public Text cakeUI;
 	// Use this for initialization
 	void Start ()
 	{
@@ -34,6 +36,7 @@ public class SeedTosser : MonoBehaviour
 			Vector3 newPos = transform.position + transform.forward * 1.5f;
 			if (curSeed == 0 && numCakeSeeds >0){
 				numCakeSeeds--;
+				cakeUI.text = numCakeSeeds.ToString();
 				GameObject newSeed = (GameObject)Instantiate (seeds [curSeed], newPos, cakeRot);
 				newSeed.SendMessage("activateSeed");
 				Rigidbody seedPhys = newSeed.GetComponent<Rigidbody> ();
@@ -52,6 +55,7 @@ public class SeedTosser : MonoBehaviour
 			if (Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 5.0f)) {
 				if (hit.collider.CompareTag("cakeSeed")){
 					numCakeSeeds++;	
+					cakeUI.text = numCakeSeeds.ToString();
 				}
 				if (hit.collider.CompareTag("grassSeed")){
 					numGrassSeeds++;
