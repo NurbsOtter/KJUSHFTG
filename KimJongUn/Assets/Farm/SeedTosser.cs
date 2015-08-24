@@ -7,6 +7,8 @@ public class SeedTosser : MonoBehaviour {
 	public Quaternion cakeRot;
 	public Collider player;
 	public GameObject canvas;
+	public Transform holdPoint;
+	public GameObject holdVictim;
 	// Use this for initialization
 	void Start () {
 		cakeRot = Quaternion.Euler (new Vector3 (-90.0f, 0.0f, 0.0f));
@@ -34,6 +36,17 @@ public class SeedTosser : MonoBehaviour {
 			if (Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward,out hit,5.0f)){
 				hit.collider.SendMessage("nomnom",SendMessageOptions.DontRequireReceiver);
 			}
+		}
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			RaycastHit hit;
+			if (Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward,out hit,5.0f)){
+				if (hit.collider.gameObject.CompareTag("cake")){
+					holdVictim = hit.collider.gameObject;
+				}
+			}
+		}
+		if (holdVictim != null || !holdVictim.Equals (null)) {
+			holdVictim.transform.position = holdPoint.position;
 		}
 	}
 }
