@@ -9,8 +9,9 @@ public class baby_kim : MonoBehaviour {
     public float score = 0;
     public GameObject canvas;
     private float spawnTime;
-    private float spawnDelay = 3f;
+    private float spawnDelay = 1f;
     public GameObject target_prefab;
+    private bool canControl = false;
 
 	// Use this for initialization
 	void Start () {
@@ -25,18 +26,24 @@ public class baby_kim : MonoBehaviour {
             score += -xvel / 10f;
             canvas.SendMessage("SetScore", score);
             Vector3 pos = transform.position;
-            if (pos.x > 0) {
+            if (!canControl && pos.x > 0) {
+                canControl = true;
                 pos.x = 0;
                 Vector2 vel = GetComponent<Rigidbody2D>().velocity;
                 xvel = -vel.x;
                 vel.x = 0f;
                 GetComponent<Rigidbody2D>().velocity = vel;
             }
+            if (canControl) {
+                float input = Input.GetAxis("Horizontal");
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(input*100F * Time.deltaTime, 0));
+            }
+
             transform.position = pos;
             GetComponent<Transform>().Rotate(0f, 0f, -rotate);
             if (spawnTime < Time.time) {
                 spawnTime = Time.time + spawnDelay;
-                spawnDelay += 0.3f;
+                spawnDelay += 0.1f;
                 Instantiate(target_prefab).SendMessage("setBaby", this);
             }
         }
@@ -44,6 +51,7 @@ public class baby_kim : MonoBehaviour {
         if (xvel > -1f) {
             xvel = 0f;
         }
+
 	}
 
     void OnCollisionEnter2D(Collision2D coll) {
