@@ -14,6 +14,9 @@ public class SeedTosser : MonoBehaviour
 	public Transform holdPoint;
 	public GameObject holdVictim;
 	public Text cakeUI;
+	public float hunger=0.0f;
+	public Text grassUI;
+	public Text hungerText;
 	// Use this for initialization
 	void Start ()
 	{
@@ -24,6 +27,13 @@ public class SeedTosser : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (hunger < 100.0f) {
+			hunger += .1f * Time.deltaTime;
+			hungerText.text = "Kim Jong Unger: " + Mathf.RoundToInt (hunger) + "%";
+		} else {
+			//TODO:DIE
+		}
+
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			curSeed = 0;
 			canvas.SendMessage ("setWeapon", 0, SendMessageOptions.RequireReceiver);
@@ -44,6 +54,7 @@ public class SeedTosser : MonoBehaviour
 			}
 			if (curSeed == 1 && numGrassSeeds >0){
 				numGrassSeeds--;
+				grassUI.text = numGrassSeeds.ToString();
 				GameObject newSeed = (GameObject)Instantiate (seeds [curSeed], newPos, cakeRot);
 				newSeed.SendMessage("activateSeed");
 				Rigidbody seedPhys = newSeed.GetComponent<Rigidbody> ();
@@ -59,6 +70,14 @@ public class SeedTosser : MonoBehaviour
 				}
 				if (hit.collider.CompareTag("grassSeed")){
 					numGrassSeeds++;
+					grassUI.text = numGrassSeeds.ToString();
+				}
+				if (hit.collider.CompareTag("cake")){
+					hunger -= 25.0f;
+					if (hunger < 0.0f){
+						hunger = 0.0f;
+					}
+					hungerText.text = "Kim Jong Unger: " + Mathf.RoundToInt (hunger) + "%";
 				}
 				hit.collider.SendMessage ("nomnom", SendMessageOptions.DontRequireReceiver);
 			}
