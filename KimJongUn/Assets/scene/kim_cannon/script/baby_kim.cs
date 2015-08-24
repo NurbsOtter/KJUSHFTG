@@ -9,7 +9,7 @@ public class baby_kim : MonoBehaviour {
     public float score = 0;
     public GameObject canvas;
     private float spawnTime;
-    private float spawnDelay = 100f;
+    private float spawnDelay = 1f;
     public GameObject target_prefab;
     private bool canControl = false;
     private bool done = false;
