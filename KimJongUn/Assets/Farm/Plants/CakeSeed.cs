@@ -31,4 +31,7 @@ public class CakeSeed : MonoBehaviour {
 	void activateSeed(){
 		allowedGrow = true;
 	}
+	void nomnom(){
+		Destroy (this.gameObject);
+	}
 }

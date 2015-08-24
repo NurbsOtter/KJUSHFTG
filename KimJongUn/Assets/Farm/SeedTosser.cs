@@ -5,6 +5,8 @@ public class SeedTosser : MonoBehaviour
 {
 	public GameObject[] seeds;
 	private int curSeed = 0;
+	private int numCakeSeeds = 5;
+	private int numGrassSeeds = 2;
 	public Quaternion cakeRot;
 	public Collider player;
 	public GameObject canvas;
@@ -30,14 +32,30 @@ public class SeedTosser : MonoBehaviour
 		}
 		if (Input.GetKeyDown (KeyCode.Mouse0)) {
 			Vector3 newPos = transform.position + transform.forward * 1.5f;
-			GameObject newSeed = (GameObject)Instantiate (seeds [curSeed], newPos, cakeRot);
-			newSeed.SendMessage("activateSeed");
-			Rigidbody seedPhys = newSeed.GetComponent<Rigidbody> ();
-			seedPhys.AddForce (transform.forward * 50.0f);
+			if (curSeed == 0 && numCakeSeeds >0){
+				numCakeSeeds--;
+				GameObject newSeed = (GameObject)Instantiate (seeds [curSeed], newPos, cakeRot);
+				newSeed.SendMessage("activateSeed");
+				Rigidbody seedPhys = newSeed.GetComponent<Rigidbody> ();
+				seedPhys.AddForce (transform.forward * 50.0f);
+			}
+			if (curSeed == 1 && numGrassSeeds >0){
+				numGrassSeeds--;
+				GameObject newSeed = (GameObject)Instantiate (seeds [curSeed], newPos, cakeRot);
+				newSeed.SendMessage("activateSeed");
+				Rigidbody seedPhys = newSeed.GetComponent<Rigidbody> ();
+				seedPhys.AddForce (transform.forward * 50.0f);
+			}
 		}
 		if (Input.GetKeyDown (KeyCode.E)) {
 			RaycastHit hit;
 			if (Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 5.0f)) {
+				if (hit.collider.CompareTag("cakeSeed")){
+					numCakeSeeds++;	
+				}
+				if (hit.collider.CompareTag("grassSeed")){
+					numGrassSeeds++;
+				}
 				hit.collider.SendMessage ("nomnom", SendMessageOptions.DontRequireReceiver);
 			}
 		}

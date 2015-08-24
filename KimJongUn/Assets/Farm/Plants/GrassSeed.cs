@@ -33,4 +33,8 @@ public class GrassSeed : MonoBehaviour {
 	void activateSeed(){
 		allowedGrow = true;
 	}
+	void nomnom()
+	{
+		Destroy (this.gameObject);
+	}
 }
