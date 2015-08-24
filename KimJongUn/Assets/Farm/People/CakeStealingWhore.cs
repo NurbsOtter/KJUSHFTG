@@ -21,7 +21,7 @@ public class CakeStealingWhore : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (testCake == null || testCake.Equals (null) || this.transform.position.Equals (testCake.transform.position) || nav.pathStatus == NavMeshPathStatus.PathComplete || nav.pathStatus == NavMeshPathStatus.PathPartial) {
+		if (testCake == null || testCake.Equals (null) || this.transform.position.Equals (testCake.transform.position) || nav.pathStatus == NavMeshPathStatus.PathComplete) {
 			GameObject[] cakes = GameObject.FindGameObjectsWithTag ("cake");
 			if (cakes.Length > 0) {
 				testCake = cakes [Random.Range (0, cakes.Length)];
