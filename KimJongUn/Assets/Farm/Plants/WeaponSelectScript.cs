@@ -5,6 +5,7 @@ using System.Collections;
 public class WeaponSelectScript : MonoBehaviour {
 	public Image cakeImg;
 	public Image grassImg;
+	public Image turretImg;
 	// Use this for initialization
 	void Start () {
 		//cakeImg = GameObject.Find ("CakeIcon").GetComponent<Image>();
@@ -16,12 +17,15 @@ public class WeaponSelectScript : MonoBehaviour {
 	
 	}
 	void setWeapon(int weapIn){
+		grassImg.color = Color.white;
+		cakeImg.color = Color.white;
+		turretImg.color = Color.white;
 		if (weapIn == 0) {
 			cakeImg.color = Color.green;
-			grassImg.color = Color.white;
-		}else if (weapIn == 1){
-			cakeImg.color = Color.white;
+		} else if (weapIn == 1) {
 			grassImg.color = Color.green;
+		} else if (weapIn == 2) {
+			turretImg.color = Color.green;
 		}
 	}
 }

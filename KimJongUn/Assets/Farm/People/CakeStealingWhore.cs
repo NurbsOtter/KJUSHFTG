@@ -6,6 +6,7 @@ public class CakeStealingWhore : MonoBehaviour
 	private NavMeshAgent nav;
 	public GameObject testCake;
 	public float timeChasing = 0.0f;
+	public int hp = 100;
 	// Use this for initialization
 	void Start ()
 	{
@@ -41,6 +42,11 @@ public class CakeStealingWhore : MonoBehaviour
 		if (col.collider.gameObject.CompareTag ("cake")) {
 			col.collider.gameObject.SendMessage ("nomnom");
 		}
-
+	}
+	void hurt(int inHurt){
+		hp -= inHurt;
+		if (hp <= 0) {
+			Destroy(this.gameObject);
+		}
 	}
 }
