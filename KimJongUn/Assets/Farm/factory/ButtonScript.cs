@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ButtonScript : MonoBehaviour {
@@ -6,6 +7,8 @@ public class ButtonScript : MonoBehaviour {
 	public GameObject factory;
 	private float timeSelected;
 	private MeshRenderer mesh;
+	public Text selectText;
+	public string selectTextOut ="";
 	// Use this for initialization
 	void Start () {
 		mesh = GetComponent<MeshRenderer> ();
@@ -22,6 +25,7 @@ public class ButtonScript : MonoBehaviour {
 	void isSelected(){
 		mesh.material.color = Color.green;
 		timeSelected = 0.0f;
+		selectText.text = selectTextOut;
 	}
 	void pushButton(){
 		factory.SendMessage ("buttonPush", buttonNo);

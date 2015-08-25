@@ -3,7 +3,10 @@ using System.Collections;
 
 public class TurretBrain : MonoBehaviour {
 	public Transform turretTrans;
+	public GameObject tomat;
+	public float tomatDelay = 0.0f;
 	private GameObject target;
+	public Transform tomatSpawn;
 	// Use this for initialization
 	void Start () {
 	
@@ -22,6 +25,13 @@ public class TurretBrain : MonoBehaviour {
 			}
 		} else {
 			turretTrans.LookAt(target.transform.position);
+			if (tomatDelay<= 0.0f){
+				GameObject newTomat = (GameObject)Instantiate(tomat,tomatSpawn.position,Quaternion.Euler(0.0f,0.0f,0.0f));
+				tomatDelay = 1.5f;
+				newTomat.GetComponent<Rigidbody>().AddForce(turretTrans.forward * 2500.0f);
+			}
+			tomatDelay -= Time.deltaTime;
+
 		}
 
 	}

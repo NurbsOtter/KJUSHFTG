@@ -7,6 +7,7 @@ public class FactoryScript : MonoBehaviour {
 	public GameObject dropPoint;
 	public GameObject cakeSeed;
 	public GameObject grassSeed;
+	public GameObject turretSeed;
 	public Text sign;
 	// Use this for initialization
 	void Start () {
@@ -35,6 +36,13 @@ public class FactoryScript : MonoBehaviour {
 			if (cakeDollars >= 2){
 				cakeDollars -= 2;
 				Instantiate(grassSeed,dropPoint.transform.position,Quaternion.identity);
+				sign.text = "" + cakeDollars;
+			}
+		}
+		if (butNo == 2) {
+			if (cakeDollars >= 5){
+				cakeDollars -= 5;
+				Instantiate(turretSeed,dropPoint.transform.position,Quaternion.identity);
 				sign.text = "" + cakeDollars;
 			}
 		}
