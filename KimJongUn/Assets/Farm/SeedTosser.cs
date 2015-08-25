@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -57,6 +57,7 @@ public class SeedTosser : MonoBehaviour
 				newSeed.SendMessage("activateSeed");
 				Rigidbody seedPhys = newSeed.GetComponent<Rigidbody> ();
 				seedPhys.AddForce (transform.forward * 50.0f);
+                GetComponent<AudioSource>().Play();
 			}
 			if (curSeed == 1 && numGrassSeeds >0){
 				numGrassSeeds--;
@@ -64,7 +65,8 @@ public class SeedTosser : MonoBehaviour
 				GameObject newSeed = (GameObject)Instantiate (seeds [curSeed], newPos, cakeRot);
 				newSeed.SendMessage("activateSeed");
 				Rigidbody seedPhys = newSeed.GetComponent<Rigidbody> ();
-				seedPhys.AddForce (transform.forward * 50.0f);
+                seedPhys.AddForce(transform.forward * 50.0f);
+                GetComponent<AudioSource>().Play();
 			}
 			if (curSeed == 2 && numTurretSeeds >0){
 				numTurretSeeds--;
@@ -72,7 +74,8 @@ public class SeedTosser : MonoBehaviour
 				GameObject newSeed = (GameObject)Instantiate (seeds [curSeed], newPos, cakeRot);
 				newSeed.SendMessage("activateSeed");
 				Rigidbody seedPhys = newSeed.GetComponent<Rigidbody> ();
-				seedPhys.AddForce (transform.forward * 50.0f);
+                seedPhys.AddForce(transform.forward * 50.0f);
+                GetComponent<AudioSource>().Play();
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.E)) {
